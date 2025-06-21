@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TAG AIRA - Andhra's First Smart Homes Villa Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a3a6e;
+            --secondary: #d4af37;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+            color: var(--dark);
+            background-color: var(--light);
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--secondary);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Header */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  transition: var(--transition);
+  background-color: rgba(26, 58, 110, 0.9);
+}
+
+header.scrolled {
+  padding: 10px 5%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  color: var(--light);
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.logo span {
+  color: var(--secondary);
+  margin-left: 5px;
+}
+
+.logo img {
+  height: 30px;
+  margin-right: 8px;
+}
+
+/* MOBILE MENU - Sidebar */
+.navigation {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  max-width: 300px;
+  height: 100vh;
+  background: var(--primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition);
+  z-index: 1001;
+  padding-top: 60px;
+  padding-right: 50px; /* room for close icon */
+}
+
+.navigation.active {
+  right: 0;
+}
+
+.navigation li {
+  list-style: none;
+  margin: 15px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.navigation li a {
+  color: var(--light);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  display: block;
+  padding: 10px 0;
+  transition: var(--transition);
+  position: relative;
+}
+
+.navigation li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: var(--secondary);
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: var(--transition);
+}
+
+.navigation li a:hover::after {
+  width: 80%;
+}
+
+/* Close icon inside mobile sidebar */
+.close-menu {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: var(--light);
+  font-size: 28px;
+  cursor: pointer;
+  display: none;
+  z-index: 1100;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.close-menu:hover {
+  color: var(--secondary);
+}
+
+.navigation.active .close-menu {
+  display: block;
+}
+
+/* Mobile menu toggle button */
+.menu-toggle {
+  display: block;
+  color: var(--light);
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1002;
+}
+
+/* ======= DESKTOP MENU ======= */
+@media (min-width: 992px) {
+  header {
+    padding: 20px 5%;
+    background-color: transparent;
+  }
+
+  header.scrolled {
+    background-color: rgba(26, 58, 110, 0.9);
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .logo img {
+    height: 35px;
+  }
+
+  /* Show menu horizontally in flex, no sidebar */
+  .navigation {
+    position: static;
+    width: auto;
+    height: auto;
+    background: transparent;
+    flex-direction: row;
+    padding: 0;
+    right: 0 !important;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .navigation li {
+    margin: 0 15px;
+    width: auto;
+  }
+
+  .navigation li a {
+    font-size: 16px;
+    color: var(--light);
+    padding: 5px 0;
+  }
+
+  /* Hide mobile menu toggle and close icon on desktop */
+  .menu-toggle {
+    display: none;
+  }
+
+  .close-menu {
+    display: none !important;
+  }
+}
+
+.navigation li a i {
+  margin-right: 8px;
+  color: var(--secondary); /* or any color you prefer */
+}
+
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 90%;
+            text-align: center;
+            padding: 0 15px;
+            z-index: 1;
+            margin-top: 60px;
+        }
+
+        .hero-content h1 {
+            color: var(--light);
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+            line-height: 1.3;
+        }
+
+        .hero-content h1 span {
+            color: var(--secondary);
+        }
+
+        .hero-content p {
+            color: var(--light);
+            font-size: 16px;
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+            line-height: 1.5;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--secondary);
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+            border: 2px solid var(--secondary);
+            font-size: 15px;
+            margin: 5px;
+            width: 90%;
+            max-width: 250px;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--secondary);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--secondary);
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* About Section */
+        .section {
+            padding: 60px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-img {
+            width: 100%;
+            padding: 0;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .about-img.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text {
+            width: 100%;
+            padding: 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .about-text.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about-text h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            flex: 0 0 100%;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .feature-item i {
+            color: var(--secondary);
+            font-size: 18px;
+            margin-right: 8px;
+            margin-top: 3px;
+        }
+
+        /* Villas Section */
+        .villas {
+            background: #f5f5f5;
+        }
+
+        .villas-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .villa-card {
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 350px;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .villa-card.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .villa-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .villa-img {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .villa-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .villa-card:hover .villa-img img {
+            transform: scale(1.05);
+        }
+
+        .villa-content {
+            padding: 15px;
+        }
+
+        .villa-content h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .villa-content p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .villa-specs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            margin-right: 12px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .spec-item i {
+            color: var(--secondary);
+            margin-right: 5px;
+            font-size: 14px;
+        }
+
+        /* Amenities Section */
+        .amenities {
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .amenities::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 58, 110, 0.9);
+        }
+
+        .amenities .section-title h2 {
+            color: var(--light);
+        }
+
+        .amenities .section-title h2::after {
+            background: var(--secondary);
+        }
+
+        .amenities-container {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            z-index: 1;
+        }
+
+        .amenity-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .amenity-card.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .amenity-card:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .amenity-card i {
+            font-size: 30px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .amenity-card h3 {
+            font-size: 16px;
+            color: var(--light);
+            margin-bottom: 8px;
+        }
+
+        .amenity-card p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Location Section */
+        .location-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .location-text {
+            width: 100%;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .location-text h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .location-text p {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .location-map {
+            width: 100%;
+            padding: 0;
+            height: 300px;
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            border: none;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #f5f5f5;
+        }
+
+        .contact-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-info {
+            width: 100%;
+            padding: 20px;
+            background: var(--light);
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .contact-info h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+
+        .contact-info p {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            font-size: 15px;
+        }
+
+        .contact-info p i {
+            color: var(--secondary);
+            margin-right: 8px;
+            margin-top: 4px;
+            font-size: 16px;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: var(--light);
+            border-radius: 50%;
+            margin-right: 8px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            width: 100%;
+            padding: 20px;
+            background: var(--light);
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .contact-form h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: none;
+        }
+
+        .submit-btn {
+            background: var(--secondary);
+            color: var(--dark);
+            border: none;
+            padding: 10px 25px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid var(--secondary);
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: transparent;
+            color: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--light);
+            padding: 40px 5% 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .footer-col {
+            width: 100%;
+        }
+
+        .footer-col h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 2px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-col p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .footer-links li {
+            list-style: none;
+            margin-bottom: 8px;
+        }
+
+        .footer-links li a {
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            font-size: 15px;
+        }
+
+        .footer-links li a:hover {
+            color: var(--secondary);
+            transform: translateX(3px);
+        }
+
+        .footer-col .social-links {
+            margin-top: 15px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: var(--secondary);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary);
+            color: var(--light);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 600px) {
+            .hero-content h1 {
+                font-size: 38px;
+            }
+            
+            .hero-content p {
+                font-size: 17px;
+            }
+            
+            .btn {
+                width: auto;
+                display: inline-block;
+            }
+            
+            .btn-container {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .feature-item {
+                flex: 0 0 50%;
+            }
+            
+            .villas-container {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .villa-card {
+                width: calc(50% - 15px);
+            }
+            
+            .amenities-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-container {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .footer-col {
+                width: calc(50% - 15px);
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 992px) {
+            header {
+                padding: 20px 5%;
+                background-color: transparent;
+            }
+            
+            header.scrolled {
+                background-color: rgba(26, 58, 110, 0.9);
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+            
+            .hero-content {
+                max-width: 800px;
+                margin-top: 0;
+            }
+            
+            .hero-content h1 {
+                font-size: 48px;
+            }
+            
+            .hero-content p {
+                font-size: 18px;
+            }
+            
+            .section {
+                padding: 80px 5%;
+            }
+            
+            .section-title h2 {
+                font-size: 32px;
+            }
+            
+            .about-content {
+                flex-direction: row;
+            }
+            
+            .about-img, .about-text {
+                width: 50%;
+                padding: 0 15px;
+            }
+            
+            .about-img {
+                margin-bottom: 0;
+            }
+            
+            .villa-card {
+                width: calc(33.333% - 20px);
+            }
+            
+            .amenities-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .location-content {
+                flex-direction: row;
+            }
+            
+            .location-text {
+                width: 50%;
+                padding-right: 30px;
+                margin-bottom: 0;
+            }
+            
+            .location-map {
+                width: 50%;
+                height: 350px;
+            }
+            
+            .contact-container {
+                flex-direction: row;
+            }
+            
+            .contact-info, .contact-form {
+                width: 50%;
+            }
+            
+            .footer-col {
+                width: calc(33.333% - 20px);
+            }
+        }
+
+        /* Large Desktop Styles */
+        @media (min-width: 1200px) {
+            header {
+                padding: 20px 8%;
+            }
+            
+            .section {
+                padding: 100px 8%;
+            }
+            
+            .hero-content h1 {
+                font-size: 56px;
+            }
+        }
+        
+        /* Video Section Styles */
+#video {
+    background: #f9f9f9;
+    padding: 80px 0;
+}
+
+.video-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.video-container video {
+    width: 100%;
+    display: block;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.play-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.8);
+    border: none;
+    color: #333;
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+
+.play-btn:hover {
+    transform: scale(1.1);
+    background: rgba(255,255,255,0.9);
+}
+
+.video-features {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.feature-card {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-card i {
+    font-size: 40px;
+    color: #d4af37;
+    margin-bottom: 15px;
+}
+
+.feature-card h4 {
+    margin: 10px 0;
+    color: #333;
+}
+
+.feature-card p {
+    color: #666;
+    font-size: 15px;
+}
+        
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+<header>
+  <a href="#" class="logo">
+    TAG <span>AIRA</span>
+  </a>
+
+  <div class="menu-toggle">
+    <i class="fas fa-bars"></i>
+  </div>
+
+ <ul class="navigation">
+  <div class="close-menu">
+    <i class="fas fa-times"></i>
+  </div>
+  <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+  <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+  <li><a href="#villas"><i class="fas fa-building"></i> Villas</a></li>
+  <li><a href="#amenities"><i class="fas fa-swimming-pool"></i> Amenities</a></li>
+  <li><a href="#location"><i class="fas fa-map-marker-alt"></i> Location</a></li>
+  <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+</ul>
+
+</header>
+
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to <span>TAG AIRA</span></h1>
+            <p>Andhra's First Smart Homes based Premium Villa Community. 55 Ultra-Luxurious G+2 Triplex Villas located in the Heart of Amaravati Capital Region.</p>
+            <div class="btn-container">
+                <a href="TAG_AIRA.pdf" class="btn btn-secondary">Download Brochure</a>
+                <a href="#villas" class="btn btn-outline">Explore Villas</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="section-title">
+            <h2>About TAG AIRA</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="TAG AIRA Villas">
+            </div>
+            <div class="about-text">
+                <h3>The Future of Luxury Living</h3>
+                <p>TAG AIRA is Andhra Pradesh's first smart homes based premium villa community, offering 55 ultra-luxurious G+2 triplex villas spread across 5 acres of premium gated community space.</p>
+                <p>Our villas are designed with modern architecture and equipped with cutting-edge smart home technology to provide seamless living experience. Each villa comes with 4 BHK configuration plus a home theater and lift provision.</p>
+                <div class="features">
+                    <div class="feature-item">
+                        <i class="fas fa-home"></i>
+                        <span>55 Premium G+2 Villas</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-vector-square"></i>
+                        <span>12,500 Sq. Ft. Clubhouse</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-robot"></i>
+                        <span>Smart Home Technology</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-swimming-pool"></i>
+                        <span>Swimming Pool & More</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+   <section id="tagAiraVideo" style="
+    position: relative;
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+">
+    <div style="
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 0 20px;
+    ">
+        <h2 style="
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        ">TAG AIRA Villas</h2>
+        <p style="
+            font-size: 1.2rem;
+            color: #444;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        ">
+            Experience the future of luxury living through our immersive showcase
+        </p>
+
+        <div class="video-container" style="
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        ">
+            <video id="airaVideo" style="
+                width: 100%;
+                display: block;
+                background: #000;
+            " controls playsinline poster="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+                <source src="Tag_Aira_WA.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <!-- Optional overlay to engage users -->
+            <div class="play-overlay" style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(0,0,0,0.3);
+                cursor: pointer;
+                opacity: 1;
+                transition: opacity 0.3s ease;
+            ">
+                <div style="
+                    width: 80px;
+                    height: 80px;
+                    background: rgba(255,255,255,0.95);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                ">
+                    <svg style="width: 32px; height: 32px; fill: #1a1a1a;" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download Button -->
+        <a href="Tag_Aira_WA.mp4" download style="
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+            padding: 12px 24px;
+            background: #1a1a1a;
+            color: #fff;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: background 0.3s ease, transform 0.2s ease;
+        " onmouseover="this.style.background='#333'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#1a1a1a'; this.style.transform='translateY(0)'">
+            <svg style="width: 20px; height: 20px; fill: #fff;" viewBox="0 0 24 24">
+                <path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.67v4h4V9h3.67L12 2z"/>
+            </svg>
+            Download Video
+        </a>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('airaVideo');
+    const playOverlay = document.querySelector('.play-overlay');
+
+    playOverlay.addEventListener('click', function() {
+        video.play().then(() => {
+            playOverlay.style.opacity = '0';
+            playOverlay.style.pointerEvents = 'none';
+        }).catch(() => {
+            video.muted = true;
+            video.play();
+        });
+    });
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                video.play().catch(() => {});
+            } else {
+                video.pause();
+            }
+        });
+    }, { threshold: 0.5 });
+
+    observer.observe(video);
+});
+</script>
+
+    <!-- Villas Section -->
+<section id="villas" style="width:100%; background:#f9f9f9; padding:60px 10px; box-sizing:border-box;">
+  <div style="text-align:center; margin-bottom:40px;">
+    <h2 style="font-size:32px; color:#222; margin:0; font-weight:600;">Our Villas</h2>
+  </div>
+
+  <div style="
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+  ">
+
+    <!-- Villa 1 -->
+    <div style="
+      flex: 1 1 300px;
+      max-width: 420px;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    ">
+      <div style="height: 220px; overflow: hidden;">
+        <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Villa 1" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+      <div style="padding: 20px;">
+        <h3 style="margin: 0 0 10px; font-size: 20px; color: #111;">4 BHK Triplex Villa</h3>
+        <p style="color: #555; font-size: 15px; margin-bottom: 15px;">
+          Spacious 4 bedroom triplex villa with modern interiors and smart home features.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+          <div style="display: flex; align-items: center; background: #f0f0f0; padding: 6px 12px; border-radius: 20px; font-size: 14px; gap: 6px;">
+            <i class="fas fa-bed" style="color: #0f7d7d;"></i><span>4 Beds</span>
+          </div>
+          <div style="display: flex; align-items: center; background: #f0f0f0; padding: 6px 12px; border-radius: 20px; font-size: 14px; gap: 6px;">
+            <i class="fas fa-bath" style="color: #0f7d7d;"></i><span>3 Baths</span>
+          </div>
+          <div style="display: flex; align-items: center; background: #f0f0f0; padding: 6px 12px; border-radius: 20px; font-size: 14px; gap: 6px;">
+            <i class="fas fa-arrows-alt" style="color: #0f7d7d;"></i><span>3200 Sq.Ft.</span>
+          </div>
+        </div>
+        <a href="https://wa.me/919502211116?text=Hello%2C%20I%E2%80%99m%20interested%20in%20TAG%20AIRA%E2%80%99s%20premium%20smart%20villas%20and%20would%20like%20more%20information."
+          target="_blank"
+          style="display:inline-flex; align-items:center; justify-content:center; background:#25d366; color:white; padding:12px 24px; border-radius:50px; text-decoration:none; font-weight:bold; font-size:15px;">
+          <i class="fab fa-whatsapp" style="margin-right:8px; font-size:18px;"></i> Contact Now
+        </a>
+      </div>
+    </div>
+
+    <!-- Duplicate Villa 2 -->
+    <div style="
+      flex: 1 1 300px;
+      max-width: 420px;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    ">
+      <div style="height: 220px; overflow: hidden;">
+        <img src="https://st.hzcdn.com/simgs/4651dd9b04bf8bf6_3-4810/home-design.jpg" alt="Villa 2" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+      <div style="padding: 20px;">
+        <h3 style="margin: 0 0 10px; font-size: 20px; color: #111;">4 BHK + Home Theater</h3>
+        <p style="color: #555; font-size: 15px; margin-bottom: 15px;">
+          Luxury villa with dedicated home theater space and premium finishes.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+          <div style="display: flex; align-items: center; background: #f0f0f0; padding: 6px 12px; border-radius: 20px; font-size: 14px; gap: 6px;">
+            <i class="fas fa-bed" style="color: #0f7d7d;"></i><span>4 Beds</span>
+          </div>
+          <div style="display: flex; align-items: center; background: #f0f0f0; padding: 6px 12px; border-radius: 20px; font-size: 14px; gap: 6px;">
+            <i class="fas fa-bath" style="color: #0f7d7d;"></i><span>3.5 Baths</span>
+          </div>
+          <div style="display: flex; align-items: center; background: #f0f0f0; padding: 6px 12px; border-radius: 20px; font-size: 14px; gap: 6px;">
+            <i class="fas fa-arrows-alt" style="color: #0f7d7d;"></i><span>3500 Sq.Ft.</span>
+          </div>
+        </div>
+        <a href="https://wa.me/919502211116?text=Hello%2C%20I%E2%80%99m%20interested%20in%20TAG%20AIRA%E2%80%99s%20premium%20smart%20villas."
+          target="_blank"
+          style="display:inline-flex; align-items:center; justify-content:center; background:#25d366; color:white; padding:12px 24px; border-radius:50px; text-decoration:none; font-weight:bold; font-size:15px;">
+          <i class="fab fa-whatsapp" style="margin-right:8px; font-size:18px;"></i> Contact Now
+        </a>
+      </div>
+    </div>
+
+    <!-- Duplicate Villa 3 -->
+    <div style="
+      flex: 1 1 300px;
+      max-width: 420px;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    ">
+      <div style="height: 220px; overflow: hidden;">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2053&q=80" alt="Villa 3" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+      <div style="padding: 20px;">
+        <h3 style="margin: 0 0 10px; font-size: 20px; color: #111;">Premium G+2 Villa</h3>
+        <p style="color: #555; font-size: 15px; margin-bottom: 15px;">
+          Ground plus two floors villa with private garden and rooftop terrace.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+          <div style="display: flex; align-items: center; background: #f0f0f0; padding: 6px 12px; border-radius: 20px; font-size: 14px; gap: 6px;">
+            <i class="fas fa-bed" style="color: #0f7d7d;"></i><span>4 Beds</span>
+          </div>
+          <div style="display: flex; align-items: center; background: #f0f0f0; padding: 6px 12px; border-radius: 20px; font-size: 14px; gap: 6px;">
+            <i class="fas fa-bath" style="color: #0f7d7d;"></i><span>4 Baths</span>
+          </div>
+          <div style="display: flex; align-items: center; background: #f0f0f0; padding: 6px 12px; border-radius: 20px; font-size: 14px; gap: 6px;">
+            <i class="fas fa-arrows-alt" style="color: #0f7d7d;"></i><span>3800 Sq.Ft.</span>
+          </div>
+        </div>
+        <a href="https://wa.me/919502211116?text=Hello%2C%20I%E2%80%99m%20interested%20in%20TAG%20AIRA%E2%80%99s%20luxury%20villa%20options."
+          target="_blank"
+          style="display:inline-flex; align-items:center; justify-content:center; background:#25d366; color:white; padding:12px 24px; border-radius:50px; text-decoration:none; font-weight:bold; font-size:15px;">
+          <i class="fab fa-whatsapp" style="margin-right:8px; font-size:18px;"></i> Contact Now
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- Amenities Section -->
+    <section class="section amenities" id="amenities">
+        <div class="section-title">
+            <h2>World-Class Amenities</h2>
+        </div>
+        <div class="amenities-container">
+            <div class="amenity-card">
+                <i class="fas fa-swimming-pool"></i>
+                <h3>Swimming Pool</h3>
+                <p>Open terrace swimming pool with stunning views</p>
+            </div>
+            <div class="amenity-card">
+                <i class="fas fa-dumbbell"></i>
+                <h3>Fully Equipped Gym</h3>
+                <p>State-of-the-art fitness center</p>
+            </div>
+            <div class="amenity-card">
+                <i class="fas fa-utensils"></i>
+                <h3>Cafeteria</h3>
+                <p>Premium dining experience</p>
+            </div>
+            <div class="amenity-card">
+                <i class="fas fa-gamepad"></i>
+                <h3>Indoor Games</h3>
+                <p>Various indoor sports facilities</p>
+            </div>
+            <div class="amenity-card">
+                <i class="fas fa-basketball-ball"></i>
+                <h3>Sports Courts</h3>
+                <p>Badminton, Basketball & Pickle Ball</p>
+            </div>
+            <div class="amenity-card">
+                <i class="fas fa-child"></i>
+                <h3>Children's Play Area</h3>
+                <p>Safe and fun play zone for kids</p>
+            </div>
+            <div class="amenity-card">
+                <i class="fas fa-hotel"></i>
+                <h3>Guest Rooms</h3>
+                <p>Comfortable accommodation for visitors</p>
+            </div>
+            <div class="amenity-card">
+    <i class="fas fa-helicopter"></i>
+    <h3>Drone Landing Zone</h3>
+    <p>Designated area for drone deliveries</p>
+</div>
+
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="section" id="location">
+        <div class="section-title">
+            <h2>Prime Location</h2>
+        </div>
+        <div class="location-content">
+            <div class="location-text">
+                <h3>Strategic Location in Amaravati Capital Region</h3>
+                <p>TAG AIRA is strategically located at Peddakakani, adjacent to Vijayawada-Guntur Highway and near Shankar Eye Hospital, placing it in the heart of the developing Amaravati Capital Region.</p>
+                <p>The location offers excellent connectivity to major business hubs, educational institutions, healthcare facilities, and entertainment zones while maintaining a peaceful residential atmosphere.</p>
+                <div class="features">
+                    <div class="feature-item">
+                        <i class="fas fa-road"></i>
+                        <span>Adjacent to VJW-Guntur Highway</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-hospital"></i>
+                        <span>Near Shankar Eye Hospital</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Heart of Amaravati Capital Region</span>
+                    </div>
+                </div>
+            </div>
+            <div class="location-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3826.324060456005!2d80.64581431535454!3d16.45920698863288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35eff9482d944b%3A0x939b7e84ab4d4df1!2sShankar%20Foundation%20Eye%20Hospital!5e0!3m2!1sen!2sin!4v1624456789012!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="section-title">
+            <h2>Contact Us</h2>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <div class="footer-col">
+  <p><i class="fas fa-user"></i> V. Ramesh Babu</p>
+  <p><i class="fas fa-map-marker-alt"></i> RR Apartment No. 102, Nehru Nagar, 1st Lane, Guntur, Andhra Pradesh, 522007</p>
+  <p>
+    <i class="fas fa-phone-alt"></i>
+    <a href="https://wa.me/919502211116" target="_blank" style="color: inherit; text-decoration: none;">
+      +91 9502211116 (WhatsApp)
+    </a>
+  </p>
+  <p>
+    <i class="fas fa-envelope"></i>
+    <a href="mailto:rvtag2022@gmail.com" style="color: inherit; text-decoration: none;">
+      rvtag2022@gmail.com
+    </a>
+  </p>
+</div>
+
+            </div>
+            <div class="contact-form">
+                <h3>Send us a Message</h3>
+               <form id="contactForm" onsubmit="sendWhatsAppMessage(); return false;">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" id="name" required>
+  </div>
+  <div class="form-group">
+    <label for="email">Your Email</label>
+    <input type="email" id="email" required>
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone</label>
+    <input type="tel" id="phone">
+  </div>
+  <div class="form-group">
+    <label for="message">Message</label>
+    <textarea id="message" required></textarea>
+  </div>
+  <button type="submit" class="submit-btn">Send Message</button>
+</form>
+
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>About TAG AIRA</h3>
+                <p>Andhra's first smart homes based premium villa community offering 55 ultra-luxurious G+2 triplex villas in the heart of Amaravati Capital Region.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Project</a></li>
+                    <li><a href="#villas">Villas</a></li>
+                    <li><a href="#amenities">Amenities</a></li>
+                    <li><a href="#location">Location</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+<div class="footer-col">
+    <h3>Contact Info</h3>
+    <p><i class="fas fa-user"></i> V. Ramesh Babu</p>
+    <p><i class="fas fa-map-marker-alt"></i> Flat No. 102, RR Apartments, 1st Lane, Nehru Nagar, Guntur, Andhra Pradesh - 522001</p>
+    
+    <!-- WhatsApp link -->
+    <p>
+        <i class="fas fa-phone-alt"></i>
+        <a href="https://wa.me/919502211116" target="_blank" style="color: inherit; text-decoration: none;">
+            +91 9502211116 (WhatsApp)
+        </a>
+    </p>
+    
+    <!-- Email link -->
+    <p>
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:rvtag2022@gmail.com" style="color: inherit; text-decoration: none;">
+            rvtag2022@gmail.com
+        </a>
+    </p>
+</div>
+
+
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 TAG AIRA Smart Villas. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+
+<script>
+function sendWhatsAppMessage() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  const text = 
+    `Contact Form Message\n\n` +
+    `Name: ${name}\n` +
+    `Email: ${email}\n` +
+    `Phone: ${phone}\n\n` +
+    `Message:\n${message}`;
+
+  const encodedText = encodeURIComponent(text);
+  const whatsappNumber = "919502211116"; // Use country code (e.g., +91 for India)
+
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
+
+  window.open(whatsappLink, "_blank"); // Open in new tab
+}
+
+</script>
+
+
+
+    <!-- JavaScript -->
+    <script>
+// Wait for the entire page to load
+    window.addEventListener('load', function () {
+        const preloader = document.querySelector('.preloader');
+        if (preloader) {
+            preloader.classList.add('fade-out');
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        }
+    });
+
+    // Scroll events
+    window.addEventListener('scroll', function () {
+        const header = document.querySelector('header');
+        const backToTop = document.querySelector('.back-to-top');
+
+        if (header) {
+            header.classList.toggle('scrolled', window.scrollY > 0);
+        }
+
+        if (backToTop) {
+            backToTop.classList.toggle('active', window.scrollY > 500);
+        }
+    });
+
+    // Optional: Scroll to top when button clicked
+    document.querySelector('.back-to-top')?.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+       const menuToggle = document.querySelector('.menu-toggle');
+const navigation = document.querySelector('.navigation');
+const closeMenu = document.querySelector('.close-menu');
+
+function openMenu() {
+  navigation.classList.add('active');
+  menuToggle.style.display = 'none';  // Hide hamburger when menu open
+}
+
+function closeMenuFunc() {
+  navigation.classList.remove('active');
+  menuToggle.style.display = 'block'; // Show hamburger when menu closed
+}
+
+menuToggle.addEventListener('click', () => {
+  openMenu();
+});
+
+closeMenu.addEventListener('click', () => {
+  closeMenuFunc();
+});
+
+// Also close menu when clicking a nav link on mobile
+document.querySelectorAll('.navigation li a').forEach(link => {
+  link.addEventListener('click', () => {
+    closeMenuFunc();
+  });
+});
+
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Scroll Animation
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.about-img, .about-text, .villa-card, .amenity-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+
+    </script>
+</body>
+</html>
